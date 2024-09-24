@@ -31,23 +31,33 @@ describe('search hotel', function(){
         //select search button
         cy.get("[data-element-name='search-button']").click({ force: true })        
         //assert results showing for bangkok
-        cy.get('[data-selenium="area-city-text"]').eq(1).should('contain.text','Bangkok')
+        cy.get('[data-selenium="area-city-text"]').each(($el,index,$list)=>{
+            cy.wrap($el).should('contain.text','Bangkok')
+        })
         //assert checkin and checkout date
         cy.get('[data-selenium="checkInText"]').should('contain.text','23 Oct 2024')
         cy.get('[data-selenium="checkOutText"]').should('contain.text','25 Oct 2024')
         //filter the price to 100 max
         cy.get('[type="text"]:visible', { force: true }).eq(2).then((clearfield)=>{
-            cy.wait(3000)
+            cy.wait(4000)
             cy.wrap(clearfield).type('100',{ force: true })
             cy.wrap(clearfield).type('{enter}',{ force: true })
         })        
         //assert first result shown is 100 or below
+        cy.get('.PropertyCardPrice__Value').each(($el,index,$list)=>{
+            cy.wrap($el).invoke('text').then((text) => {
+                const value = parseFloat(text); // Convert the text to a number
+              
+                expect(value).to.be.lte(100); 
+        })
+    })
+        /*
         cy.get('.PropertyCardPrice__Value').eq(0).invoke('text').then((text) => {
             const value = parseFloat(text); // Convert the text to a number
           
             expect(value).to.be.lte(100); 
 
-        })       
+        })    */   
     })
 })
 

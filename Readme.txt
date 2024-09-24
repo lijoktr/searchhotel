@@ -5,7 +5,16 @@ Steps to create project
 4. npm install cypress --save-dev
 5. npm install
 6. .\node_modules\.bin\cypress open //for opening testrunner 
-7. 
+
+Pushing code from 2nd time:
+1. git add .
+2. git commit -m "updating max price field"    
+3. git push -u origin master 
+
+Running code through command line:
+1. npx Cypress run --spec C:\Users\lijom\Cypress\searchhotel\cypress\integration\examples\searchhotel.js --headed --browser chrome   
+
+
 /*
 Error1: We initially found matching element(s), but while waiting for them to become actionable, they disappeared from the page
 soltn: click({force: true})
