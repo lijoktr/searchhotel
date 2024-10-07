@@ -6,13 +6,10 @@ Steps to create project
 5. npm install
 6. .\node_modules\.bin\cypress open //for opening testrunner 
 
-Pushing code from 2nd time:
-1. git add .
-2. git commit -m "updating max price field"    
-3. git push -u origin master 
-
-Running code through command line:
-1. npx Cypress run --spec C:\Users\lijom\Cypress\searchhotel\cypress\integration\examples\searchhotel.js --headed --browser chrome   
+framework build Steps
+1. create the test script
+2. Handle data with fixtures
+3. 
 
 
 /*
@@ -23,5 +20,14 @@ err2:  object tested must be an array, a map, an object, a set, a string, or a w
 soltn: should('contain.text','Bangkok')
 
 err3: cy.should() failed because the page updated as a result of this command, but you tried to continue the command chain.
-soltn: 
+soltn: .should('be.visible');
 */
+
+Pushing code from 2nd time:
+1. git add .
+2. git commit -m "updating max price field"    
+3. git push -u origin master 
+
+Running code through command line:
+1. npx Cypress run --spec C:\Users\lijom\Cypress\searchhotel\cypress\integration\examples\searchhotel.js --headed --browser chrome   
+
