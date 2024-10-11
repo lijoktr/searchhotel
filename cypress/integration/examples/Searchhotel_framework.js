@@ -26,14 +26,11 @@ describe('search hotel', function(){
         cy.get("button[data-element-name='occupancy-selector-panel-children']:nth-child(3)").should('be.visible')
         //select age of child 1 and 2
         cy.get("[data-selenium='dropdownInput']").each(($el,index,$list)=>{
-            if(index===0)
-            {
-                cy.wrap($el).select("5", { force: true })
-            }
-            else{
-                cy.wrap($el).select("10", { force: true })
-                cy.wait(1000)
-            }
+            cy.wrap($el).select(index === 0 ? "5" : "10", { force: true }).then(() => {
+                
+                  cy.wait(1000);
+                
+              });
 
         } )
         //select search button
