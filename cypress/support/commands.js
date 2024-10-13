@@ -11,6 +11,12 @@
 //
 // -- This is a parent command --
 // Cypress.Commands.add('login', (email, password) => { ... })
+Cypress.Commands.add('selectcity', (cityname) => { 
+    cy.get('[data-selenium="area-city-text"]').each(($el,index,$list)=>{
+    cy.wrap($el).should('contain.text',cityname)
+}) })
+        
+
 //
 //
 // -- This is a child command --

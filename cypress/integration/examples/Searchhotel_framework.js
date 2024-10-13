@@ -1,4 +1,7 @@
 ///<reference types = "cypress"/>
+import Homepage from "../Pageobjects/Homepage"
+import Resultpage from "../Pageobjects/Resultpage"
+
 
 describe('search hotel', function(){
     before(function(){
@@ -7,49 +10,46 @@ describe('search hotel', function(){
             this.data=data
         }) 
     })
-
-
     it('agoda.com', function(){
+        const homepage = new Homepage()
+        const resultpage = new Resultpage()
         //open url
         cy.visit('https://www.agoda.com/en-gb/')
         //search field
-        cy.get('#textInput').type(this.data.city)
+        homepage.getcityeditbox().type(this.data.city)
         //select Bangkok from dynamic dropdown
-        cy.get('li[data-element-value="Bangkok"]').click()
+        homepage.getclickcity().click()
         //Select checkindate
-        cy.get("#check-in-box")
-        cy.get('[data-selenium-date="2024-11-23"]').click({force: true})
+        homepage.getcheckindatefield()
+        homepage.getcheckindate().click({force: true})
         //Select checkoutdate
-        cy.get('[data-selenium-date="2024-11-25"]').click({force: true})
+        homepage.getcheckoutdate().click({force: true})        
         //add children count to 2
-        cy.get("button[data-element-name='occupancy-selector-panel-children']:nth-child(3)").click({force: true}).click({force: true})
-        cy.get("button[data-element-name='occupancy-selector-panel-children']:nth-child(3)").should('be.visible')
+        homepage.getchildrencount().click({force: true}).click({force: true})
         //select age of child 1 and 2
-        cy.get("[data-selenium='dropdownInput']").each(($el,index,$list)=>{
+        homepage.getchildageindex().each(($el,index,$list)=>{            
             cy.wrap($el).select(index === 0 ? "5" : "10", { force: true }).then(() => {
-                
-                  cy.wait(1000);
+
+                cy.wait(1000);
                 
               });
 
         } )
         //select search button
-        cy.get("[data-element-name='search-button']").click({ force: true })        
-        //assert results showing for bangkok
-        cy.get('[data-selenium="area-city-text"]').each(($el,index,$list)=>{
-            cy.wrap($el).should('contain.text',this.data.city)
-        })
+        homepage.getsearch().click({ force: true })        
+        //assert results showing for bangkok by customised command in command.js
+        cy.selectcity(this.data.city)
         //assert checkin and checkout date
-        cy.get('[data-selenium="checkInText"]').should('contain.text',this.data.checkindate)
-        cy.get('[data-selenium="checkOutText"]').should('contain.text',this.data.checkoutdate)
+        resultpage.getcheckindatedisplayed().should('contain.text',this.data.checkindate)
+        resultpage.getcheckoutdatedisplayed().should('contain.text',this.data.checkoutdate)
         //filter the price to 100 max
-        cy.get('[type="text"]:visible', { force: true }).eq(2).then((clearfield)=>{
+        resultpage.getpricefilter().eq(2).then((clearfield)=>{
             cy.wait(4000)
             cy.wrap(clearfield).type(this.data.maxprice,{ force: true })
             cy.wrap(clearfield).type(this.data.enterbutton,{ force: true })
         })        
         //assert first result shown is 100 or below
-        cy.get('.PropertyCardPrice__Value').each(($el,index,$list)=>{
+        resultpage.getfirstfilter().each(($el,index,$list)=>{
             cy.wrap($el).invoke('text').then((text) => {
                 const value = parseFloat(text); // Convert the text to a number
               
