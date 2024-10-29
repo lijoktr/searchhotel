@@ -4,6 +4,7 @@
 //
 // This is a great place to put global configuration and
 // behavior that modifies Cypress.
+import 'cypress-mochawesome-reporter/register';
 //
 // You can change the location of this file or turn off
 // automatically serving support files with the

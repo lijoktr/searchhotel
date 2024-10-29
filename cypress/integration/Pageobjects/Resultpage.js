@@ -16,7 +16,5 @@ class Resultpage
     {
         return cy.get('.PropertyCardPrice__Value')
     }
-
-
 }
 export default Resultpage;
