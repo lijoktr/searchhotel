@@ -9,5 +9,5 @@ jobs:
             - name: Cypress run
               uses: cypress-io/github-action@v2
               with: 
-                build: npx Cypress run --spec C:\Users\lijom\Cypress\searchhotel\cypress\integration\examples\searchhotel.js --headed --browser chrome
+                build: npx Cypress run
                 start: npm start
