@@ -9,8 +9,9 @@ Steps to create project
 framework build Steps
 1. create the test script
 2. Handle data with fixtures
-3. 
-
+3. Page object model   
+4. default command timeout or env variables
+5. mochawsome reporter
 
 /*
 Error1: We initially found matching element(s), but while waiting for them to become actionable, they disappeared from the page

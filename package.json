@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "npx cypress run",
+    "test_headed_browser_spec": "npx Cypress run --spec C:/Users/lijom/Cypress/searchhotel/cypress/integration/examples/Searchhotel_framework.js --headed --browser chrome"
   },
   "author": "",
   "license": "ISC",
